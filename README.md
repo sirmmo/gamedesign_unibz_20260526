@@ -4,6 +4,8 @@ Talk for the **Game Design course at the Free University of Bozen-Bolzano** — 
 
 **Marco Montanari** · 26 May 2026 · [BoardGameGeek @sirmmo](https://boardgamegeek.com/user/sirmmo)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20310092.svg)](https://doi.org/10.5281/zenodo.20310092)
+
 📽 **Slides:** https://ingmmo.com/gamedesign_unibz_20260526/
 📄 **PDF:** https://ingmmo.com/gamedesign_unibz_20260526/unibz_boardgame_publishing_talk.pdf
 
@@ -37,6 +39,26 @@ Or, with a local Node 18+ install:
 ```bash
 npx --yes @marp-team/marp-cli@4 unibz_boardgame_publishing_talk.md \
   --theme themes/editorial-press.css --html -o index.html
+```
+
+## Citation
+
+Archived on Zenodo: **[https://doi.org/10.5281/zenodo.20310092](https://doi.org/10.5281/zenodo.20310092)**
+(GitHub's *"Cite this repository"* button reads [`CITATION.cff`](CITATION.cff).)
+
+> Montanari, M. (2026). *Inside Board Game Publishing: Editorial Process, Post-2020 Economics, and Computer-Aided Games* [Slides]. Game Design course, Free University of Bozen-Bolzano, Bolzano, Italy. https://doi.org/10.5281/zenodo.20310092
+
+```bibtex
+@misc{montanari2026boardgame,
+  author       = {Montanari, Marco},
+  title        = {{Inside Board Game Publishing: Editorial Process,
+                   Post-2020 Economics, and Computer-Aided Games}},
+  year         = {2026},
+  month        = may,
+  howpublished = {Slides, Game Design course, Free University of Bozen-Bolzano},
+  doi          = {10.5281/zenodo.20310092},
+  url          = {https://doi.org/10.5281/zenodo.20310092}
+}
 ```
 
 ## Image credits

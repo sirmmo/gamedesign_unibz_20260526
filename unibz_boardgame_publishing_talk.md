@@ -815,7 +815,8 @@ Offer to send slides + reading list afterward.
 Questions, pushback, war stories — all welcome.
 
 **Marco Montanari**
-<!-- [contact info / handle — TO FILL] -->
+BoardGameGeek [@sirmmo](https://boardgamegeek.com/user/sirmmo)
+Cite these slides — [doi.org/10.5281/zenodo.20310092](https://doi.org/10.5281/zenodo.20310092)
 
 <!--
 15 minutes of Q&A.

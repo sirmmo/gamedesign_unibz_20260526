@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use or reference this talk, please cite it as below."
+title: "Inside Board Game Publishing: Editorial Process, Post-2020 Economics, and Computer-Aided Games"
+authors:
+  - family-names: Montanari
+    given-names: Marco
+date-released: "2026-05-26"
+version: "1.0"
+doi: 10.5281/zenodo.20310092
+url: "https://ingmmo.com/gamedesign_unibz_20260526/"
+repository-code: "https://github.com/sirmmo/gamedesign_unibz_20260526"
+keywords:
+  - board games
+  - game design
+  - board game publishing
+  - computer-aided games
+  - tabletop games
+preferred-citation:
+  type: slides
+  title: "Inside Board Game Publishing: Editorial Process, Post-2020 Economics, and Computer-Aided Games"
+  authors:
+    - family-names: Montanari
+      given-names: Marco
+  year: 2026
+  month: 5
+  doi: 10.5281/zenodo.20310092
+  url: "https://doi.org/10.5281/zenodo.20310092"
+  institution:
+    name: "Free University of Bozen-Bolzano — Game Design course"
+  location:
+    name: "Bolzano, Italy"
