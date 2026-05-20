@@ -1,0 +1,69 @@
+name: Build & deploy Marp slides to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment, cancel in-progress runs on new pushes
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  DECK: unibz_boardgame_publishing_talk.md
+  THEME: themes/editorial-press.css
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build HTML deck (served as the site root)
+        run: |
+          set -eux
+          mkdir -p dist
+          npx --yes @marp-team/marp-cli@4 "$DECK" \
+            --theme "$THEME" \
+            --html --allow-local-files \
+            -o dist/index.html
+          # Images are referenced with relative paths in the markdown,
+          # so copy them next to index.html.
+          cp -r images dist/images
+
+      - name: Build PDF (downloadable; best-effort)
+        continue-on-error: true
+        run: |
+          set -eux
+          npx --yes @marp-team/marp-cli@4 "$DECK" \
+            --theme "$THEME" \
+            --pdf --allow-local-files \
+            -o "dist/${DECK%.md}.pdf"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

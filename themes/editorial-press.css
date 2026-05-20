@@ -1,0 +1,1015 @@
+/*!
+ * @theme editorial-press
+ *
+ * Inspired by trade-quarterly magazines about craft industries:
+ * warm uncoated paper, deep ink, a single printing-press red.
+ * Left-aligned, asymmetric, hairline rules, tabular figures.
+ * Pairs Bricolage Grotesque (variable display) with Vollkorn (warm serif).
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..125,200..800&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root {
+  /* Paper */
+  --paper:          oklch(0.972 0.014 88);
+  --paper-sub:      oklch(0.935 0.020 85);
+  --paper-deep:     oklch(0.900 0.024 80);
+
+  /* Ink */
+  --ink:            oklch(0.205 0.020 260);
+  --ink-2:          oklch(0.420 0.022 260);
+  --ink-mute:       oklch(0.585 0.018 95);
+
+  /* Rules */
+  --rule:           oklch(0.450 0.025 95);
+  --rule-soft:      oklch(0.780 0.022 90);
+
+  /* Accent — printing press red */
+  --accent:         oklch(0.510 0.165 28);
+  --accent-deep:    oklch(0.330 0.115 25);
+  --accent-soft:    oklch(0.880 0.040 28);
+
+  /* Spacing — 4pt scale */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+
+  /* Type scale (1280×720 stage, projected) */
+  --t-display:  104px;
+  --t-h1:       54px;
+  --t-h2:       28px;
+  --t-lead:     22px;
+  --t-body:     20px;
+  --t-small:    16px;
+  --t-chrome:   12px;
+}
+
+/* ============================================================
+   BASE SLIDE
+   ============================================================ */
+
+section {
+  width: 1280px;
+  height: 720px;
+  padding: 84px 96px 88px;
+  background: var(--paper);
+  color: var(--ink);
+
+  font-family: 'Vollkorn', 'Iowan Old Style', Charter, Georgia, serif;
+  font-feature-settings: 'liga', 'kern', 'onum', 'ss01';
+  font-size: var(--t-body);
+  font-weight: 400;
+  line-height: 1.42;
+  letter-spacing: -0.003em;
+
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle stippling for paper texture (multiply blend, ink-tinted) */
+section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px,
+      oklch(0.205 0.020 260 / 0.028) 1px,
+      transparent 0);
+  background-size: 5px 5px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+
+section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   HEADINGS
+   ============================================================ */
+
+h1, h2, h3, h4 {
+  font-family: 'Bricolage Grotesque', 'Helvetica Neue', sans-serif;
+  font-variation-settings: 'wdth' 95, 'opsz' 96;
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.028em;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--t-h1);
+  font-variation-settings: 'wdth' 90, 'opsz' 96, 'wght' 700;
+  margin: 0 0 var(--s-4);
+  max-width: 22ch;
+}
+
+/* The press-red rule beneath every content h1 */
+h1::after {
+  content: '';
+  display: block;
+  width: 88px;
+  height: 4px;
+  background: var(--accent);
+  margin-top: var(--s-3);
+}
+
+/* When an h2 immediately follows an h1, treat it as an italic subtitle (Vollkorn) */
+h1 + h2 {
+  font-family: 'Vollkorn', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--t-h2);
+  line-height: 1.22;
+  color: var(--ink-2);
+  letter-spacing: -0.005em;
+  margin-top: var(--s-2);
+  margin-bottom: var(--s-6);
+  max-width: 32ch;
+}
+
+h2 {
+  font-size: var(--t-h2);
+  font-variation-settings: 'wdth' 100, 'opsz' 36, 'wght' 600;
+  margin: var(--s-4) 0 var(--s-3);
+  max-width: 36ch;
+}
+
+h3 {
+  font-size: 22px;
+  font-variation-settings: 'wdth' 100, 'opsz' 20, 'wght' 600;
+  letter-spacing: -0.01em;
+  margin: var(--s-4) 0 var(--s-2);
+}
+
+/* ============================================================
+   BODY
+   ============================================================ */
+
+p {
+  margin: 0 0 var(--s-3);
+  max-width: 64ch;
+}
+
+p + p { margin-top: var(--s-2); }
+
+strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+em {
+  font-style: italic;
+}
+
+a {
+  color: var(--accent-deep);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  text-underline-offset: 2px;
+}
+
+/* Lead paragraph: first paragraph after the h1/h2 block reads as a deck */
+section > h1 + p,
+section > h1 + h2 + p {
+  font-size: var(--t-lead);
+  line-height: 1.34;
+  color: var(--ink-2);
+  font-weight: 500;
+  max-width: 50ch;
+  margin-bottom: var(--s-5);
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+ul, ol {
+  margin: 0 0 var(--s-4);
+  padding: 0;
+  list-style: none;
+}
+
+ul li, ol li {
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: var(--s-3);
+  max-width: 68ch;
+}
+
+ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+/* Nested */
+ul ul, ol ul, ul ol, ol ol {
+  margin-top: var(--s-2);
+  margin-bottom: var(--s-2);
+}
+
+ul ul li::before {
+  content: '·';
+  color: var(--ink-mute);
+  font-size: 1.4em;
+  top: -0.25em;
+}
+
+ol {
+  counter-reset: ol-counter;
+}
+
+ol li {
+  counter-increment: ol-counter;
+  padding-left: 44px;
+}
+
+ol li::before {
+  content: counter(ol-counter, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.4em;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 100, 'opsz' 14, 'wght' 700;
+  font-feature-settings: 'tnum';
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--s-4) 0 var(--s-5);
+  font-feature-settings: 'tnum', 'lnum';
+  font-size: 20px;
+}
+
+thead th {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 110, 'opsz' 14, 'wght' 600;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  font-size: 12px;
+  color: var(--ink-2);
+  text-align: left;
+  padding: 12px 18px 8px;
+  border-bottom: 1.5px solid var(--ink);
+}
+
+tbody td {
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: top;
+  font-variant-numeric: tabular-nums;
+}
+
+tbody tr:last-child td {
+  border-bottom: 1.5px solid var(--ink);
+  font-weight: 700;
+  background: var(--paper-sub);
+}
+
+tbody tr:last-child td strong {
+  color: var(--accent-deep);
+}
+
+/* ============================================================
+   BLOCKQUOTE
+   ============================================================ */
+
+blockquote {
+  margin: var(--s-5) 0;
+  padding: 0 0 0 var(--s-5);
+  font-family: 'Vollkorn', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.22;
+  color: var(--ink);
+  max-width: 26ch;
+  position: relative;
+}
+
+blockquote::before {
+  content: '\201C';
+  position: absolute;
+  left: -0.08em;
+  top: -0.32em;
+  font-size: 2.2em;
+  color: var(--accent);
+  font-family: 'Vollkorn', serif;
+  font-weight: 500;
+  line-height: 1;
+}
+
+blockquote p { margin: 0; max-width: 100%; }
+
+/* ============================================================
+   HORIZONTAL RULE
+   ============================================================ */
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule-soft);
+  margin: var(--s-4) 0;
+}
+
+/* ============================================================
+   CODE
+   ============================================================ */
+
+code {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--paper-sub);
+  padding: 0.08em 0.32em;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   PAGE CHROME — header, footer, pagination
+   ============================================================ */
+
+header {
+  position: absolute;
+  top: 36px;
+  left: 96px;
+  right: 96px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 110, 'opsz' 12, 'wght' 500;
+  font-size: var(--t-chrome);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  display: flex;
+  justify-content: flex-start;
+  z-index: 2;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 0.5px;
+  background: var(--rule-soft);
+}
+
+footer {
+  position: absolute;
+  bottom: 36px;
+  left: 96px;
+  right: 240px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 105, 'opsz' 12, 'wght' 500;
+  font-size: var(--t-chrome);
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  z-index: 2;
+}
+
+/* Pagination — accent-colored, tabular, with leading mark */
+section[data-marpit-pagination]::after {
+  position: absolute;
+  bottom: 30px;
+  right: 96px;
+  content: '\25A0  ' attr(data-marpit-pagination);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 100, 'opsz' 14, 'wght' 700;
+  font-feature-settings: 'tnum';
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  z-index: 2;
+}
+
+/* ============================================================
+   TITLE SLIDE  ( <!-- _class: title --> )
+   ============================================================ */
+
+section.title {
+  padding: 96px 112px;
+  background: var(--paper);
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+section.title header,
+section.title footer { display: none; }
+
+section.title::after { display: none !important; }
+
+section.title h1 {
+  font-size: var(--t-display);
+  font-variation-settings: 'wdth' 78, 'opsz' 96, 'wght' 800;
+  letter-spacing: -0.044em;
+  line-height: 0.92;
+  max-width: 14ch;
+  margin: 0;
+}
+
+section.title h1::after {
+  width: 168px;
+  height: 6px;
+  margin-top: var(--s-5);
+}
+
+section.title h2 {
+  font-family: 'Vollkorn', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.18;
+  color: var(--accent-deep);
+  letter-spacing: -0.01em;
+  max-width: 30ch;
+  margin: var(--s-4) 0 0;
+}
+
+/* Author block — Vollkorn body with a Bricolage uppercase name */
+section.title p {
+  font-family: 'Vollkorn', serif;
+  font-size: 19px;
+  color: var(--ink-2);
+  max-width: 50ch;
+  margin: 0 0 var(--s-2);
+}
+
+section.title p:has(strong) {
+  margin-top: var(--s-6);
+}
+
+section.title p strong {
+  display: block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 100, 'opsz' 20, 'wght' 700;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: var(--s-1);
+}
+
+section.title p:last-of-type {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 105, 'opsz' 14, 'wght' 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-mute);
+  margin-top: var(--s-5);
+}
+
+/* The masthead line at the top of the title slide */
+section.title::before {
+  content: 'No. 01  ·  May 2026  ·  Free University of Bozen-Bolzano';
+  position: absolute;
+  top: 56px;
+  left: 112px;
+  right: 112px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 105, 'opsz' 12, 'wght' 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+
+  /* Drop the texture on the title slide */
+  background-image: none;
+  mix-blend-mode: normal;
+  z-index: 2;
+  pointer-events: none;
+  display: block;
+  height: auto;
+  inset: auto;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ink);
+}
+
+/* ============================================================
+   LEAD / DIVIDER SLIDES  ( <!-- _class: lead --> )
+   ============================================================ */
+
+section.lead {
+  padding: 96px 112px;
+  background: var(--paper);
+  justify-content: center;
+  align-items: flex-start;
+}
+
+section.lead::before { background-image: none; }
+
+section.lead header,
+section.lead footer { display: none; }
+
+section.lead h1 {
+  font-size: var(--t-display);
+  font-variation-settings: 'wdth' 78, 'opsz' 96, 'wght' 800;
+  letter-spacing: -0.044em;
+  line-height: 0.92;
+  color: var(--ink);
+  margin: 0;
+  max-width: 16ch;
+}
+
+section.lead h1::after {
+  width: 160px;
+  height: 5px;
+  margin-top: var(--s-4);
+}
+
+section.lead h2 {
+  font-family: 'Vollkorn', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1.18;
+  color: var(--accent-deep);
+  letter-spacing: -0.012em;
+  text-transform: none;
+  margin: var(--s-5) 0 0;
+  max-width: 28ch;
+}
+
+section.lead p {
+  font-family: 'Vollkorn', serif;
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink-2);
+  max-width: 48ch;
+  margin-top: var(--s-5);
+}
+
+section.lead p strong {
+  display: block;
+  margin-top: var(--s-4);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 100, 'opsz' 20, 'wght' 700;
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-style: normal;
+}
+
+/* Lead slides keep pagination but pushed down a touch */
+section.lead[data-marpit-pagination]::after {
+  bottom: 56px;
+  right: 112px;
+}
+
+/* ============================================================
+   GALLERY SLIDE  ( <!-- _class: gallery --> )
+   Three-up image strip with editorial captions
+   ============================================================ */
+
+section.gallery {
+  padding: 72px 96px 88px;
+}
+
+section.gallery::before { background-image: none; }
+
+section.gallery h1 {
+  font-size: 44px;
+  font-variation-settings: 'wdth' 92, 'opsz' 64, 'wght' 700;
+  margin-bottom: var(--s-3);
+  max-width: 24ch;
+}
+
+section.gallery h1::after {
+  width: 72px;
+  height: 3px;
+  margin-top: var(--s-3);
+}
+
+section.gallery > p {
+  font-family: 'Vollkorn', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.35;
+  color: var(--ink-2);
+  max-width: 80ch;
+  margin-bottom: var(--s-6);
+}
+
+section.gallery .boxes {
+  display: flex;
+  gap: 48px;
+  align-items: flex-end;
+  flex: 1;
+  min-height: 0;
+}
+
+section.gallery .boxes figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+section.gallery .boxes img {
+  display: block;
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: left bottom;
+  /* Editorial frame: thin ink hairline, no rounded corners */
+  border: 1px solid var(--ink);
+  background: var(--paper-sub);
+  box-shadow: 4px 4px 0 0 var(--paper-deep);
+}
+
+section.gallery .boxes figcaption {
+  margin-top: var(--s-4);
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--rule-soft);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 110, 'opsz' 12, 'wght' 600;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.45;
+  align-self: stretch;
+}
+
+section.gallery .boxes figcaption br + * { /* publisher line softer */
+  font-weight: 400;
+  color: var(--ink-mute);
+}
+
+/* Hide the masthead rule on gallery (no header text) */
+section.gallery header { display: none; }
+
+/* ============================================================
+   NUMBERS SLIDE  ( <!-- _class: numbers --> )
+   Magazine-sidebar style: oversized accent figures + serif glosses
+   ============================================================ */
+
+section.numbers h1 {
+  max-width: 32ch;
+}
+
+section.numbers .numbers-list {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  column-gap: 32px;
+  align-items: baseline;
+  margin: var(--s-3) 0 var(--s-3);
+  max-width: 880px;
+}
+
+section.numbers .numbers-list dt {
+  font-family: 'Bricolage Grotesque', 'Helvetica Neue', sans-serif;
+  font-variation-settings: 'wdth' 88, 'opsz' 64, 'wght' 700;
+  font-feature-settings: 'tnum', 'lnum';
+  font-size: 46px;
+  letter-spacing: -0.045em;
+  line-height: 1.0;
+  color: var(--accent);
+  text-align: right;
+  padding: 8px 0 6px;
+  border-top: 1px solid var(--rule-soft);
+  align-self: center;
+}
+
+section.numbers .numbers-list dd {
+  margin: 0;
+  font-family: 'Vollkorn', serif;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.32;
+  color: var(--ink);
+  padding: 8px 0 6px;
+  border-top: 1px solid var(--rule-soft);
+  align-self: center;
+  max-width: 56ch;
+}
+
+/* First row gets a heavier ink rule — "table head" feel */
+section.numbers .numbers-list dt:first-of-type,
+section.numbers .numbers-list dt:first-of-type + dd {
+  border-top: 1.5px solid var(--ink);
+}
+
+/* Closing paragraph after the dl */
+section.numbers .numbers-list + p {
+  font-family: 'Vollkorn', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  max-width: 68ch;
+  margin-top: var(--s-3);
+}
+
+/* ============================================================
+   OFM SLIDE  ( <!-- _class: ofm --> )
+   Hero image + supporting thumbnails — schema visualised
+   ============================================================ */
+
+section.ofm {
+  padding: 64px 96px 80px;
+}
+
+section.ofm::before { background-image: none; }
+section.ofm header { display: none; }
+
+section.ofm h1 {
+  font-size: 40px;
+  font-variation-settings: 'wdth' 92, 'opsz' 56, 'wght' 700;
+  margin-bottom: var(--s-2);
+  max-width: 30ch;
+}
+
+section.ofm h1::after {
+  width: 72px;
+  height: 3px;
+  margin-top: var(--s-2);
+}
+
+section.ofm > p {
+  font-family: 'Vollkorn', serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.38;
+  color: var(--ink-2);
+  max-width: 86ch;
+  margin-bottom: var(--s-4);
+}
+
+section.ofm > p strong {
+  font-weight: 700;
+  color: var(--ink);
+  font-style: normal;
+}
+
+section.ofm .ofm-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  column-gap: 28px;
+  flex: 1;
+  min-height: 0;
+}
+
+section.ofm .ofm-grid figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+section.ofm .ofm-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  border: 1px solid var(--ink);
+  background: var(--paper-sub);
+  object-fit: cover;
+  object-position: center;
+}
+
+section.ofm .ofm-grid figcaption {
+  margin-top: 10px;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: 'Bricolage Grotesque', 'Helvetica Neue', sans-serif;
+  font-variation-settings: 'wdth' 105, 'opsz' 12, 'wght' 500;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  line-height: 1.45;
+}
+
+section.ofm .ofm-grid .hero img {
+  max-height: 440px;
+  object-fit: contain;
+  background: var(--ink);
+}
+
+section.ofm .ofm-grid .thumbs {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 14px;
+  min-height: 0;
+}
+
+section.ofm .ofm-grid .thumbs figure img {
+  max-height: 205px;
+  object-fit: cover;
+}
+
+/* ============================================================
+   WORLDS TEASER SLIDE  ( <!-- _class: worlds --> )
+   Two landscape renders, side by side — sets up an end callback
+   ============================================================ */
+
+section.worlds {
+  padding: 64px 96px 80px;
+}
+
+section.worlds::before { background-image: none; }
+section.worlds header { display: none; }
+
+section.worlds h1 {
+  font-size: 44px;
+  font-variation-settings: 'wdth' 92, 'opsz' 64, 'wght' 700;
+  margin-bottom: var(--s-5);
+  max-width: 30ch;
+}
+
+section.worlds h1::after {
+  width: 80px;
+  height: 4px;
+  margin-top: var(--s-3);
+}
+
+section.worlds .worlds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 32px;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: var(--s-4);
+}
+
+section.worlds .worlds-grid figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+section.worlds .worlds-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  object-fit: cover;
+  object-position: center;
+}
+
+section.worlds .worlds-grid figcaption {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: 'Bricolage Grotesque', 'Helvetica Neue', sans-serif;
+  font-variation-settings: 'wdth' 105, 'opsz' 13, 'wght' 500;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+section.worlds .worlds-grid figcaption em {
+  font-family: 'Vollkorn', serif;
+  font-style: italic;
+  color: var(--ink-2);
+}
+
+section.worlds > p {
+  font-family: 'Vollkorn', serif;
+  font-size: 19px;
+  line-height: 1.38;
+  color: var(--ink-2);
+  max-width: 88ch;
+}
+
+section.worlds > p strong {
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+/* ============================================================
+   WHO AM I SLIDE  ( <!-- _class: whoami --> )
+   BoardGameGeek profile card pinned to the right
+   ============================================================ */
+
+/* Keep bullets clear of the card */
+section.whoami li {
+  max-width: 56ch;
+}
+
+section.whoami .bgg-card {
+  position: absolute;
+  top: 220px;
+  right: 96px;
+  width: 232px;
+  margin: 0;
+  z-index: 2;
+}
+
+section.whoami .bgg-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: auto;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 5px 5px 0 0 var(--paper-deep);
+}
+
+section.whoami .bgg-card figcaption {
+  margin-top: 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: 'Bricolage Grotesque', 'Helvetica Neue', sans-serif;
+  font-variation-settings: 'wdth' 105, 'opsz' 12, 'wght' 600;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* ============================================================
+   ANCIENT INDUSTRY SLIDE  ( <!-- _class: ancient --> )
+   Two landscape museum artifacts that flex to fill the slide
+   ============================================================ */
+
+section.ancient h1 {
+  margin-bottom: var(--s-2);
+}
+
+section.ancient > p {
+  font-family: 'Vollkorn', serif;
+  font-size: 20px;
+  line-height: 1.32;
+  color: var(--ink-2);
+  max-width: 84ch;
+  margin-bottom: var(--s-2);
+}
+
+section.ancient > p strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+section.ancient .ancient-figs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 28px;
+  flex: 1;
+  min-height: 0;
+  margin: var(--s-3) 0;
+}
+
+section.ancient .ancient-figs figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+section.ancient .ancient-figs img {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+}
+
+section.ancient .ancient-figs figcaption {
+  margin-top: 10px;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: 'Bricolage Grotesque', 'Helvetica Neue', sans-serif;
+  font-variation-settings: 'wdth' 105, 'opsz' 12, 'wght' 500;
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  line-height: 1.4;
+}
