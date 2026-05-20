@@ -4,8 +4,8 @@ Talk for the **Game Design course at the Free University of Bozen-Bolzano** — 
 
 **Marco Montanari** · 26 May 2026 · [BoardGameGeek @sirmmo](https://boardgamegeek.com/user/sirmmo)
 
-📽 **Slides:** https://sirmmo.github.io/gamdesign_unibz_20260526/
-📄 **PDF:** https://sirmmo.github.io/gamdesign_unibz_20260526/unibz_boardgame_publishing_talk.pdf
+📽 **Slides:** https://ingmmo.com/gamedesign_unibz_20260526/
+📄 **PDF:** https://ingmmo.com/gamedesign_unibz_20260526/unibz_boardgame_publishing_talk.pdf
 
 ## Structure
 
